@@ -6,8 +6,11 @@ import {
   TouchableOpacity,
   BackHandler,
   Alert,
+  KeyboardAvoidingView,
+  Keyboard,
 } from 'react-native';
 import React from 'react';
+import {DarkTheme} from '@react-navigation/native';
 
 const GiveUsFeedbackScreen = ({navigation}) => {
   const [text, SetText] = React.useState(null);
@@ -18,22 +21,30 @@ const GiveUsFeedbackScreen = ({navigation}) => {
       'Now you will return to the Main Menu!',
       [{text: 'OK', onPress: () => navigation.navigate('Main Menu')}],
     );
+    Keyboard.dismiss();
   };
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Give us your feedback in the box below!</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={SetText}
-        value={text}
-        placeholder="Write your feedback here!"
-        keyboardType="default"
-        numberOfLines={1}
-      />
-      <TouchableOpacity style={styles.button} onPress={AfterPressedButton}>
-        <Text style={styles.buttonText}>Submit</Text>
-      </TouchableOpacity>
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={{flex: 1}}>
+      <View style={styles.container}>
+        <Text style={styles.text}>Give us your feedback in the box below!</Text>
+        <TextInput
+          keyboardAppearance="light"
+          style={styles.input}
+          onChangeText={SetText}
+          value={text}
+          placeholder="Write your feedback here!"
+          placeholderTextColor={'#999966'}
+          color="black"
+          keyboardType="default"
+          numberOfLines={1}
+        />
+        <TouchableOpacity style={styles.button} onPress={AfterPressedButton}>
+          <Text style={styles.buttonText}>Submit</Text>
+        </TouchableOpacity>
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -44,7 +55,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   input: {
-    height: '6%',
+    height: '8%',
     margin: '5%',
     width: '70%',
     borderWidth: 1,
@@ -54,6 +65,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     color: 'red',
+    margin: 10,
   },
   button: {
     width: 100,
