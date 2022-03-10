@@ -15,22 +15,34 @@ import QRCodeScan from './src/Components/QRCodeScan';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createStackNavigator, createAppContainer} from 'react-navigation';
+import RateUsScreen from './src/Components/RateUsScreen';
+import GiveUsFeedbackScreen from './src/Components/GiveUsFeedbackScreen';
 
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Main Menu">
         <Stack.Screen
           name="Main Menu"
           component={QRcodeButton}
           options={{title: 'Main Menu'}}
         />
         <Stack.Screen
-          name="QRKodOkuyucu"
+          name="QRCodeScanner"
           component={QRCodeScan}
           options={{title: 'QRCodeScanner'}}
+        />
+        <Stack.Screen
+          name="RateUsScreen"
+          component={RateUsScreen}
+          options={{title: 'Thanks for your rating!'}}
+        />
+        <Stack.Screen
+          name="GiveUsFeedBackScreen"
+          component={GiveUsFeedbackScreen}
+          options={{title: 'Thanks for your feedback!'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -58,18 +70,18 @@ const StackNavigator = () => {
 
 const QRcodeButton = ({navigation}) => {
   return (
-    <View style={styles.LogoandButton}>
-      <TouchableOpacity onPress={() => navigation.navigate('QRKodOkuyucu')}>
-        {/* Burdaki navigation bir işe yaramadı çıkartsak bile çalışıyor :/ */}
+    <View style={styles.Container}>
+      <View style={styles.TextContainer}>
+        <Text style={styles.Text1}>Welcome to the QRCodeScanner!</Text>
+        <Text style={styles.Text2}>Press the button below !</Text>
+        <Text style={styles.Text2}>for Scanning!</Text>
+      </View>
+      <TouchableOpacity onPress={() => navigation.navigate('QRCodeScanner')}>
         <Image
-          style={{
-            width: 110,
-            height: 70,
-            borderRadius: 100,
-          }}
+          style={styles.button}
           source={require('./src/images/icon.jpg')}></Image>
       </TouchableOpacity>
-      <Text style={{marginTop: 5, color: 'red', fontWeight: 'bold'}}>
+      <Text style={{marginTop: 5, color: 'black', fontWeight: 'bold'}}>
         QRcodeScanner
       </Text>
     </View>
@@ -77,11 +89,32 @@ const QRcodeButton = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  LogoandButton: {
+  Container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    top: 180,
+    top: 150,
+  },
+  button: {
+    width: 110,
+    height: 70,
+    borderRadius: 100,
+  },
+  Text1: {
+    bottom: 250,
+    fontWeight: 'bold',
+    color: 'red',
+    fontSize: 24,
+  },
+  Text2: {
+    bottom: 220,
+    fontWeight: 'bold',
+    color: 'red',
+    fontSize: 24,
+  },
+  TextContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
