@@ -73,7 +73,7 @@ const QRcodeButton = ({navigation}) => {
     <View style={styles.Container}>
       <View style={styles.TextContainer}>
         <Text style={styles.Text1}>Welcome to the QRCodeScanner!</Text>
-        <Text style={styles.Text2}>Press the button below !</Text>
+        <Text style={styles.Text2}>Press the button below </Text>
         <Text style={styles.Text2}>for Scanning!</Text>
       </View>
       <TouchableOpacity onPress={() => navigation.navigate('QRCodeScanner')}>
